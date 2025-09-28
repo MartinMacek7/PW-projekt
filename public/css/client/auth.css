@@ -1,0 +1,137 @@
+:root {
+    --bg: #f5f7fa;
+    --card: #fff;
+    --accent: #2563eb;
+    --muted: #6b7280;
+    --radius: 8px;
+    --max-width: 400px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111827;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: var(--max-width);
+}
+
+.card.register {
+    margin: 30px auto;
+    width: 700px;
+}
+
+.card.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    margin: 0 0 2px;
+    font-size: 22px;
+}
+p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: var(--muted);
+}
+form {
+    display: grid;
+    gap: 16px;
+}
+label {
+    font-size: 14px;
+    color: var(--muted);
+}
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+}
+input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+}
+.btn {
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 15px;
+}
+.btn:hover {
+    background: #1d4ed8;
+}
+.alt {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+}
+.alt a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.form-errors {
+    margin-bottom: 8px;
+}
+
+.form-error {
+    color: red;
+    display: block;
+    font-weight: bold;
+}
+
+input[type="tel"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+}
+
+input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+}
+
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    background: #fff;
+    color: #111827;
+    appearance: none;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+}
