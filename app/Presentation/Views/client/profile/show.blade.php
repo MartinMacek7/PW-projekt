@@ -2,6 +2,18 @@
 
 @section('title', 'Profil')
 
+@section('css')
+<style>
+
+    button.save {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+
+
+</style>
+@endsection
+
 @section('content')
 <div class="container my-5">
     <div class="row justify-content-center">
@@ -115,7 +127,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">💾 Uložit změny</button>
+                            <button type="submit" class="btn btn-primary save">Uložit změny</button>
                         </div>
                     </form>
                 </div>

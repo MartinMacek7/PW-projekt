@@ -9,12 +9,9 @@ class HomepageController extends Controller
 {
 
 
-    protected $userRepo;
-
     public function __construct(UserRepository $userRepo)
     {
         parent::__construct();
-        $this->userRepo = $userRepo;
     }
 
 

@@ -34,8 +34,23 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 
 
 Route::get('/accounts', [BankAccountController::class, 'index'])->name('accounts');
+Route::get('/accounts/{account}', [BankAccountController::class, 'show'])
+    ->middleware('account.owner')
+    ->name('accounts.show');
+
+
 Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
+Route::get('/transactions/create', [TransactionController::class, 'showCreateForm'])->name('transactions.create');
+Route::post('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create.post');
+
 Route::get('/cards', [CardController::class, 'index'])->name('cards');
+Route::get('cards/{card}', [CardController::class, 'show'])
+    ->middleware('card.owner')
+    ->name('cards.show');
+Route::post('cards/{card}/toggle', [CardController::class, 'toggle'])
+    ->middleware('card.owner')
+    ->name('cards.toggle');
+
 Route::get('/standing-orders', [StandingOrderController::class, 'index'])->name('standing_orders');
 Route::get('/loans', [LoanController::class, 'index'])->name('loans');
 

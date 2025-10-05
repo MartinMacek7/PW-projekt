@@ -25,7 +25,6 @@ class ProfileController extends Controller
         return view('client.profile.show', compact('user'));
     }
 
-    // todo zkontrolovat profile
 
     public function update(ProfileRequest $request)
     {
