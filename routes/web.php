@@ -51,7 +51,35 @@ Route::post('cards/{card}/toggle', [CardController::class, 'toggle'])
     ->middleware('card.owner')
     ->name('cards.toggle');
 
-Route::get('/standing-orders', [StandingOrderController::class, 'index'])->name('standing_orders');
+Route::get('/standing-orders/create', [StandingOrderController::class, 'create'])
+    ->name('standing_orders.create');
+
+Route::get('/standing-orders', [StandingOrderController::class, 'index'])
+    ->name('standing_orders');
+
+Route::get('/standing-orders/{standingOrder}', [StandingOrderController::class, 'show'])
+    ->middleware('standing_order.owner')
+    ->name('standing_orders.show');
+
+Route::delete('/standing-orders/{standingOrder}', [StandingOrderController::class, 'destroy'])
+    ->middleware('standing_order.owner')
+    ->name('standing_orders.destroy');
+
+
+Route::post('/standing-orders', [StandingOrderController::class, 'store'])
+    ->name('standing_orders.store');
+
 Route::get('/loans', [LoanController::class, 'index'])->name('loans');
+Route::get('/loans/create', [LoanController::class, 'create'])->name('loans.create');
+Route::post('/loans', [LoanController::class, 'store'])->name('loans.store');
+
+Route::get('/loans/{loan}', [LoanController::class, 'show'])
+    ->middleware('loan.owner')
+    ->name('loans.show');
+
+Route::delete('/loans/{loan}', [LoanController::class, 'destroy'])
+    ->middleware('loan.owner')
+    ->name('loans.destroy');
+
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');

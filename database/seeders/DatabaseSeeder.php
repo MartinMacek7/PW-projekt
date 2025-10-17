@@ -8,6 +8,8 @@ use App\Domain\Enums\AccountType;
 use App\Domain\Enums\Currency;
 use App\Domain\Models\BankAccount;
 use App\Domain\Models\Card;
+use App\Domain\Models\Loan;
+use App\Domain\Models\StandingOrder;
 use App\Domain\Models\Transaction;
 use App\Domain\Models\User;
 use Carbon\Carbon;
@@ -112,6 +114,31 @@ class DatabaseSeeder extends Seeder
             'expire_month' => 3,
             'cvv' => '654',
             'is_active' => true,
+        ]);
+
+        StandingOrder::factory()->count(4)->create([
+            'bank_account_id' => $account1->id,
+        ]);
+
+        StandingOrder::factory()->count(3)->create([
+            'bank_account_id' => $account2->id,
+        ]);
+
+
+        Loan::create([
+            'user_id' => $user1->id,
+            'interest_rate' => 5.5,
+            'monthly_payment' => 2000,
+            'total_balance' => 50000,
+            'remaining_balance' => 40000,
+        ]);
+
+        Loan::create([
+            'user_id' => $user2->id,
+            'interest_rate' => 3.9,
+            'monthly_payment' => 1500,
+            'total_balance' => 30000,
+            'remaining_balance' => 15000,
         ]);
 
     }

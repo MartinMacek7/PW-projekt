@@ -67,5 +67,7 @@ class Kernel extends HttpKernel
 
         'card.owner' => \App\Presentation\Http\Middleware\EnsureCardOwnership::class,
         'account.owner' => \App\Presentation\Http\Middleware\EnsureAccountOwnership::class,
+        'standing_order.owner' => \App\Presentation\Http\Middleware\EnsureStandingOrderOwnership::class,
+        'loan.owner' => \App\Presentation\Http\Middleware\EnsureLoanOwnership::class,
     ];
 }
