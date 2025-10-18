@@ -2,6 +2,7 @@
 
 namespace App\Domain\Models;
 
+use App\Domain\Enums\UserRole;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,6 +16,7 @@ use Illuminate\Notifications\Notifiable;
  * @property int $id
  * @property string $name
  * @property string $surname
+ * @property int $permission_level
  * @property string $email
  * @property string $birth_number
  * @property string $phone_number
@@ -53,6 +55,7 @@ class User extends Authenticatable
         'address_zip_code',
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -86,6 +89,16 @@ class User extends Authenticatable
     public function getBankAccounts(): Collection
     {
         return $this->bankAccounts()->get();
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->permission_level >= UserRole::ADMIN->value;
+    }
+
+    public function isBanker(): bool
+    {
+        return $this->permission_level >= UserRole::BANKER->value;
     }
 
 

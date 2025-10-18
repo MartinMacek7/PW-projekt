@@ -44,6 +44,28 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('loans*') ? 'active' : '' }}" href="{{ route('loans') }}">Úvěry</a>
                     </li>
+
+                    @if(auth()->user()->isBanker())
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-danger"href="#" id="navbarBankDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pracovník banky
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarBankDropdown">
+                                <li><a class="dropdown-item" href="{{ route('admin.clients.index') }}">Klienti</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.bank_accounts.index') }}">Správa bankovních účtů</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.transactions.index') }}">Správa transakcí</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.cards.index') }}">Správa karet</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.standing_orders.index') }}">Správa trvalých příkazů</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.loans.index') }}">Správa úvěrů</a></li>
+
+                                @if(auth()->user()->isAdmin())
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="{{ route('admin.users.index') }}">Správa uživatelů</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
+
                 </ul>
 
                 <div class="d-flex">
