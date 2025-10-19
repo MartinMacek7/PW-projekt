@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Domain\Enums\Currency;
 use App\Domain\Models\User;
+use App\Presentation\Http\Rules\CounterpartAccountNumberRule;
 
 class TransactionRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class TransactionRequest extends FormRequest
                 'required',
                 Rule::in($userBankAccountIds),
             ],
-            'counterparty_account_number' => ['required', 'string', 'max:20'],
+            'counterparty_account_number' => ['required', new CounterpartAccountNumberRule(50)],
             'counterparty_bank_code' => ['required', 'string', 'max:10'],
             'vs' => ['nullable', 'string', 'max:20'],
             'amount' => ['required', 'numeric', 'min:0.01'],

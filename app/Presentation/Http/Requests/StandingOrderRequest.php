@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Domain\Enums\Currency;
 use App\Domain\Enums\PaymentFrequency;
+use App\Presentation\Http\Rules\CounterpartAccountNumberRule;
 
 class StandingOrderRequest extends FormRequest
 {
@@ -18,7 +19,7 @@ class StandingOrderRequest extends FormRequest
     {
         return [
             'bank_account_id' => ['required', 'exists:bank_accounts,id'],
-            'counterpart_account_number' => ['required', 'string', 'max:50'],
+            'counterpart_account_number' => ['required', new CounterpartAccountNumberRule(50)],
             'counterpart_bank_code' => ['required', 'string', 'max:10'],
             'amount' => ['required', 'numeric', 'min:0.01'],
             'currency' => ['required', Rule::in(array_column(Currency::cases(), 'value'))],
