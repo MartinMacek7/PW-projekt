@@ -2,10 +2,10 @@
 
 namespace App\Presentation\Http\Controllers\Client;
 
+use App\Application\Services\UserService;
 use App\Presentation\Http\Controllers\Controller;
 use App\Presentation\Http\Requests\ProfileRequest;
 use App\Domain\Models\User;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +13,7 @@ class ProfileController extends Controller
 {
 
 
-    public function __construct()
+    public function __construct(private UserService $userService)
     {
         parent::__construct();
     }
@@ -28,19 +28,10 @@ class ProfileController extends Controller
 
     public function update(ProfileRequest $request)
     {
-        $user = Auth::user();
-
-        $values = $request->validated();
 
         /** @var User $user */
-        $user->fill(Arr::except($values, ['password']));
-
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
-
-        $user->save();
-
+        $user = Auth::user();
+        $this->userService->updateUser($user, $request);
         return redirect()->route('profile')->with('success', 'Profil byl úspěšně aktualizován.');
     }
 

@@ -3,47 +3,52 @@
 namespace App\Infrastructure\Repositories;
 
 use App\Domain\Models\User;
-use \Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class UserRepository
 {
 
-    protected $model;
-
-    public function __construct(User $model)
+    public function filter(array $filters): LengthAwarePaginator
     {
-        $this->model = $model;
+        $query = User::query();
+
+        if (!empty($filters['name'])) {
+            $query->where('name', 'like', '%' . $filters['name'] . '%')
+                  ->orWhere('surname', 'like', '%' . $filters['name'] . '%');
+        }
+
+        if (!empty($filters['email'])) {
+            $query->where('email', 'like', '%' . $filters['email'] . '%');
+        }
+
+        if (!empty($filters['phone_number'])) {
+            $query->where('phone_number', 'like', '%' . $filters['phone_number'] . '%');
+        }
+
+        if (!empty($filters['birth_number'])) {
+            $query->where('birth_number', 'like', '%' . $filters['birth_number'] . '%');
+        }
+
+        return $query->orderBy('surname')->paginate(15);
     }
 
 
-    public function getAll(): Collection
+    public function updateRole(User $user, int $role): bool
     {
-        return $this->model->all();
+        $user->permission_level = $role;
+        return $user->save();
     }
 
 
-    public function getById(int $id): ?User
+    public function delete(User $user): bool
     {
-        return $this->model->find($id);
+        return $user->delete();
     }
 
 
-    public function getByEmail(string $email): ?User
+    public function findById(int $id): ?User
     {
-        return $this->model->where('email', $email)->first();
+        return User::find($id);
     }
-
-
-    public function getByBirthNumber(string $birthNumber): ?User
-    {
-        return $this->model->where('birth_number', $birthNumber)->first();
-    }
-
-
-    public function create(array $data): User
-    {
-        return $this->model->create($data);
-    }
-
 
 }

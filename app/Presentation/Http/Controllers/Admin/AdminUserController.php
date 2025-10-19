@@ -2,61 +2,46 @@
 
 namespace App\Presentation\Http\Controllers\Admin;
 
-use App\Domain\Enums\UserRole;
+use App\Application\Services\UserService;
 use App\Domain\Models\User;
 use Illuminate\Http\Request;
 
 class AdminUserController extends AdminController
 {
 
-    public function __construct()
+    public function __construct(private UserService $userService)
     {
-        $this->middleware('admin');
+        parent::__construct();
     }
 
 
     public function index(Request $request)
     {
-        $query = User::query();
-
-        if ($request->filled('email')) {
-            $query->where('email', 'like', '%'.$request->email.'%');
-        }
-
-        if ($request->filled('name')) {
-            $query->where('name', 'like', '%'.$request->name.'%');
-        }
-
-        if ($request->filled('surname')) {
-            $query->where('surname', 'like', '%'.$request->surname.'%');
-        }
-
-        $users = $query->orderBy('id', 'desc')->get();
-
+        $users = $this->userService->getFilteredUsers($request->only(['email', 'name', 'surname']));
         return view('admin.users.index', compact('users'));
     }
 
+
     public function updateRole(User $user, Request $request)
     {
-        $newRole = $request->input('role');
+        $newRole = (int)$request->input('role');
+        $updated = $this->userService->updateUserRole($user, $newRole);
 
-        if (!UserRole::tryFrom((int)$newRole)) {
-            return redirect()->route('admin.users.index')->with('error', 'Neplatná role.');
+        if (! $updated) {
+            return redirect()->route('admin.users.index')
+                ->with('error', 'Neplatná role.');
         }
 
-        $user->permission_level = (int)$newRole;
-        $user->save();
-
-        return redirect()->route('admin.users.index')->with('success', 'Role byla aktualizována.');
+        return redirect()->route('admin.users.index')
+            ->with('success', 'Role byla aktualizována.');
     }
+
 
     public function destroy(User $user)
     {
-        if ($user->permission_level === UserRole::ADMIN->value) {
-            return redirect()->route('admin.users.index')->with('error', 'Administrátora nelze smazat.');
-        }
+        $this->userService->deleteUser($user);
 
-        $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'Uživatel byl smazán.');
+        return redirect()->route('admin.users.index')
+            ->with('success', 'Uživatel byl smazán.');
     }
 }

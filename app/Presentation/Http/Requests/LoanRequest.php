@@ -14,9 +14,9 @@ class LoanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'requested_amount' => ['required', 'numeric', 'min:1000'], // požadovaná částka úvěru
-            'monthly_payment' => ['required', 'numeric', 'min:100'],   // měsíční splátka
-            'months' => ['required', 'integer', 'min:1'],             // délka splácení v měsících
+            'requested_amount' => ['required', 'numeric', 'min:1000'],
+            'monthly_payment' => ['required', 'numeric', 'min:100'],
+            'months' => ['required', 'integer', 'min:1'],
         ];
     }
 }

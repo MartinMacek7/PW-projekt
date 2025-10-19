@@ -1,4 +1,4 @@
-@extends('client.layout')
+@extends('layout')
 
 @section('title', 'Moje úvěry')
 

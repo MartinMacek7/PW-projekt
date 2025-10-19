@@ -33,11 +33,8 @@ class CardController extends Controller
 
     public function toggle(Request $request, Card $card)
     {
-        $card->is_active = !$card->is_active;
-        $card->save();
-
+        $this->cardService->toggleCard($card);
         $status = $card->is_active ? 'odblokována' : 'zablokována';
-
         return redirect()->route('cards', $card)->with('success', "Karta byla úspěšně {$status}.");
     }
 

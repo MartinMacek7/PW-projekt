@@ -2,7 +2,9 @@
 
 namespace App\Presentation\Http\Requests;
 
+use App\Domain\Enums\AccountType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AdminBankAccountRequest extends FormRequest
 {
@@ -15,10 +17,8 @@ class AdminBankAccountRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'exists:users,id'],
-            'account_number' => ['required', 'string', 'max:20'],
-            'account_type' => ['required', 'in:CHECKING,SAVINGS'],
+            'account_type' => ['required', Rule::in(array_column(AccountType::cases(), 'value'))],
             'currency' => ['required', 'in:CZK,EUR,USD'],
-            'balance' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

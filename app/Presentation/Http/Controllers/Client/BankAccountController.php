@@ -31,7 +31,6 @@ class BankAccountController extends Controller
 
     public function show(BankAccount $account)
     {
-
         return view('client.bank_accounts.show', compact('account'));
     }
 

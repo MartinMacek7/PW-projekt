@@ -3,31 +3,57 @@
 namespace App\Infrastructure\Repositories;
 
 use App\Domain\Models\Card;
-use \Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CardRepository
 {
 
-    protected $model;
-
-    public function __construct(Card $model)
+    public function getAll(?int $userId = null)
     {
-        $this->model = $model;
+        $query = Card::query()->with('bankAccount.user');
+
+        if ($userId) {
+            $query->whereHas('bankAccount', fn($q) => $q->where('user_id', $userId));
+        }
+
+        return $query->orderByDesc('created_at')->get();
     }
 
 
-    public function getAll(?int $userId = null): Collection
+    public function filter(array $filters): LengthAwarePaginator
     {
-        $cards = $this->model->all();
+        $query = Card::query()->with('bankAccount.user');
 
-        if ($userId) {
-            $cards = $cards->filter(function ($card) use ($userId) {
-                return $card->bankAccount->user_id === $userId;
+        if (!empty($filters['account'])) {
+            $query->whereHas('bankAccount', fn($q) =>
+                $q->where('account_number', 'like', '%' . $filters['account'] . '%')
+            );
+        }
+
+        if (!empty($filters['client'])) {
+            $query->whereHas('bankAccount.user', function ($q) use ($filters) {
+                $q->where('name', 'like', '%' . $filters['client'] . '%')
+                  ->orWhere('surname', 'like', '%' . $filters['client'] . '%');
             });
         }
 
-        return $cards->sortByDesc('created_at');
+        if (!empty($filters['status'])) {
+            $isActive = $filters['status'] === 'active';
+            $query->where('is_active', $isActive);
+        }
+
+        return $query->orderByDesc('created_at')->paginate(15);
     }
 
+
+    public function update(Card $card, array $attributes): void
+    {
+        $card->update($attributes);
+    }
+
+
+    public function create($data): Card {
+        return Card::create($data);
+    }
 
 }
