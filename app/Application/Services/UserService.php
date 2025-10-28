@@ -6,6 +6,7 @@ use App\Domain\Enums\UserRole;
 use App\Domain\Models\User;
 use App\Infrastructure\Repositories\UserRepository;
 use App\Presentation\Http\Requests\AdminClientRequest;
+use App\Presentation\Http\Requests\ProfileRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -16,7 +17,7 @@ class UserService
     public function __construct(private UserRepository $userRepository)
     {}
 
-    public function updateUser(User $user, AdminClientRequest $request): void
+    public function updateUser(User $user, AdminClientRequest|ProfileRequest $request): void
     {
         $data = $request->validated();
 

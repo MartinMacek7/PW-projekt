@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presentation\Http\Rules;
+namespace App\Domain\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;

@@ -24,7 +24,7 @@ class AdminClientRequest extends FormRequest
             'birth_number' => ['required', 'string', 'max:20', 'unique:users,birth_number,' . $clientId],
             'phone_number' => ['required', 'string', 'max:20', 'unique:users,phone_number,' . $clientId],
             'gender' => ['required', 'in:M,F'],
-            'password' => ['nullable', 'confirmed', 'min:6'],
+            'password' => ['nullable', 'confirmed', 'min:8'],
         ];
     }
 }

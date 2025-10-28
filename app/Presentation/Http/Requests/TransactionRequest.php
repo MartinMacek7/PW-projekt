@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Domain\Enums\Currency;
 use App\Domain\Models\User;
-use App\Presentation\Http\Rules\CounterpartAccountNumberRule;
+use App\Domain\Rules\CounterpartAccountNumberRule;
 
 class TransactionRequest extends FormRequest
 {

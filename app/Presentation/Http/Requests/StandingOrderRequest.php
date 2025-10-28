@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Domain\Enums\Currency;
 use App\Domain\Enums\PaymentFrequency;
-use App\Presentation\Http\Rules\CounterpartAccountNumberRule;
+use App\Domain\Rules\CounterpartAccountNumberRule;
 
 class StandingOrderRequest extends FormRequest
 {
