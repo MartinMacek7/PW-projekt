@@ -1,19 +1,19 @@
 <?php
 
-use App\Presentation\Http\Controllers\Admin\AdminBankAccountController;
-use App\Presentation\Http\Controllers\Admin\AdminCardController;
-use App\Presentation\Http\Controllers\Admin\AdminLoanController;
-use App\Presentation\Http\Controllers\Admin\AdminStandingOrderController;
-use App\Presentation\Http\Controllers\Admin\AdminTransactionController;
-use App\Presentation\Http\Controllers\Admin\AdminUserController;
-use App\Presentation\Http\Controllers\Client\AuthController;
-use App\Presentation\Http\Controllers\Client\BankAccountController;
-use App\Presentation\Http\Controllers\Client\CardController;
-use App\Presentation\Http\Controllers\Client\HomepageController;
-use App\Presentation\Http\Controllers\Client\LoanController;
-use App\Presentation\Http\Controllers\Client\ProfileController;
-use App\Presentation\Http\Controllers\Client\StandingOrderController;
-use App\Presentation\Http\Controllers\Client\TransactionController;
+use Presentation\Http\Controllers\Admin\AdminBankAccountController;
+use Presentation\Http\Controllers\Admin\AdminCardController;
+use Presentation\Http\Controllers\Admin\AdminLoanController;
+use Presentation\Http\Controllers\Admin\AdminStandingOrderController;
+use Presentation\Http\Controllers\Admin\AdminTransactionController;
+use Presentation\Http\Controllers\Admin\AdminUserController;
+use Presentation\Http\Controllers\Client\AuthController;
+use Presentation\Http\Controllers\Client\BankAccountController;
+use Presentation\Http\Controllers\Client\CardController;
+use Presentation\Http\Controllers\Client\HomepageController;
+use Presentation\Http\Controllers\Client\LoanController;
+use Presentation\Http\Controllers\Client\ProfileController;
+use Presentation\Http\Controllers\Client\StandingOrderController;
+use Presentation\Http\Controllers\Client\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,9 +93,9 @@ Route::delete('/loans/{loan}', [LoanController::class, 'destroy'])
 // admin routes
 
 Route::prefix('admin')->name('admin.')->group(function() {
-    Route::get('clients', [\App\Presentation\Http\Controllers\Admin\AdminClientController::class, 'index'])->name('clients.index');
-    Route::get('clients/{client}/edit', [\App\Presentation\Http\Controllers\Admin\AdminClientController::class, 'edit'])->name('clients.edit');
-    Route::put('clients/{client}', [\App\Presentation\Http\Controllers\Admin\AdminClientController::class, 'update'])->name('clients.update');
+    Route::get('clients', [\Presentation\Http\Controllers\Admin\AdminClientController::class, 'index'])->name('clients.index');
+    Route::get('clients/{client}/edit', [\Presentation\Http\Controllers\Admin\AdminClientController::class, 'edit'])->name('clients.edit');
+    Route::put('clients/{client}', [\Presentation\Http\Controllers\Admin\AdminClientController::class, 'update'])->name('clients.update');
 });
 
 Route::prefix('admin')

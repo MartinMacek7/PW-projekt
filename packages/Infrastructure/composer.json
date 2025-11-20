@@ -1,0 +1,8 @@
+{
+    "name": "app/infrastructure",
+    "autoload": {
+        "psr-4": {
+            "Infrastructure\\": "src/"
+        }
+    }
+}

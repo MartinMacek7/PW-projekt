@@ -22,6 +22,10 @@
     },
     "autoload": {
         "psr-4": {
+            "Domain\\": "packages/Domain/src/",
+            "Infrastructure\\": "packages/Infrastructure/src/",
+            "Application\\": "packages/Application/src/",
+            "Presentation\\": "packages/Presentation/src/",
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
@@ -61,6 +65,24 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/Domain"
+        },
+        {
+            "type": "path",
+            "url": "packages/Infrastructure"
+        },
+        {
+            "type": "path",
+            "url": "packages/Application"
+        },
+        {
+            "type": "path",
+            "url": "packages/Presentation"
+        }
+    ]
 }

@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Domain\Enums\PaymentFrequency;
+use Domain\Enums\PaymentFrequency;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Domain\Models\StandingOrder;
+use Domain\Models\StandingOrder;
 
 class StandingOrderFactory extends Factory
 {

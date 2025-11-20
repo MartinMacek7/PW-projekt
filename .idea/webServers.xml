@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="00ee35b5-ddab-4174-a9de-063b64e38e4b" name="VPS" url="http://pw.martinmacek.cz/">
+        <fileTransfer rootFolder="/var/www/PW" accessType="SFTP" host="185.119.98.214" port="22" sshConfigId="15dad613-6220-4c63-a1f2-03c24344e020" sshConfig="vps@185.119.98.214:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

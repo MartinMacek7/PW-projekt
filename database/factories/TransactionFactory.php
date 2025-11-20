@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Domain\Models\Transaction;
-use App\Domain\Models\BankAccount;
+use Domain\Models\Transaction;
+use Domain\Models\BankAccount;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Domain\Enums\TransactionType;
-use App\Domain\Enums\TransactionStatus;
+use Domain\Enums\TransactionType;
+use Domain\Enums\TransactionStatus;
 
 class TransactionFactory extends Factory
 {

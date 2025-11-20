@@ -4,14 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Domain\Enums\AccountType;
-use App\Domain\Enums\Currency;
-use App\Domain\Models\BankAccount;
-use App\Domain\Models\Card;
-use App\Domain\Models\Loan;
-use App\Domain\Models\StandingOrder;
-use App\Domain\Models\Transaction;
-use App\Domain\Models\User;
+use Domain\Enums\AccountType;
+use Domain\Enums\Currency;
+use Domain\Models\BankAccount;
+use Domain\Models\Card;
+use Domain\Models\Loan;
+use Domain\Models\StandingOrder;
+use Domain\Models\Transaction;
+use Domain\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
