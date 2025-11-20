@@ -2,16 +2,16 @@
 
 namespace Presentation\Http\Controllers\Client;
 
-use Application\Services\StandingOrderService;
+use Application\Services\Interface\IStandingOrderService;
 use Domain\Models\StandingOrder;
+use Illuminate\Support\Facades\Auth;
 use Presentation\Http\Controllers\Controller;
 use Presentation\Http\Requests\StandingOrderRequest;
-use Illuminate\Support\Facades\Auth;
 
 class StandingOrderController extends Controller
 {
 
-    public function __construct(private StandingOrderService $standingOrderService)
+    public function __construct(private IStandingOrderService $standingOrderService)
     {
         parent::__construct();
     }

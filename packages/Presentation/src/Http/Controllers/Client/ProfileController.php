@@ -2,18 +2,17 @@
 
 namespace Presentation\Http\Controllers\Client;
 
-use Application\Services\UserService;
-use Presentation\Http\Controllers\Controller;
-use Presentation\Http\Requests\ProfileRequest;
+use Application\Services\Interface\IUserService;
 use Domain\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Presentation\Http\Controllers\Controller;
+use Presentation\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
 
 
-    public function __construct(private UserService $userService)
+    public function __construct(private IUserService $userService)
     {
         parent::__construct();
     }

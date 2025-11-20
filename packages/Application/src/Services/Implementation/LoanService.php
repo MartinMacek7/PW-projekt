@@ -1,21 +1,23 @@
 <?php
 
-namespace Application\Services;
+namespace Application\Services\Implementation;
 
+use Application\Services\Interface\ILoanService;
 use Domain\Models\Loan;
-use Infrastructure\Repositories\LoanRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Infrastructure\Repositories\LoanRepository;
 
-class LoanService
+class LoanService implements ILoanService
 {
 
     public function __construct(private LoanRepository $loanRepository)
-    {}
+    {
+    }
 
 
-
-    public function getUserLoans(int $userId)
+    public function getUserLoans(int $userId): Collection
     {
         return $this->loanRepository->getLoans($userId);
     }

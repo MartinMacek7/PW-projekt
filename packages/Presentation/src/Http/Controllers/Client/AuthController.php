@@ -2,18 +2,18 @@
 
 namespace Presentation\Http\Controllers\Client;
 
+use Application\Services\Interface\IAuthService;
 use Illuminate\Http\Request;
-use Application\Services\AuthService;
-use Presentation\Http\Requests\ProfileRequest;
 use Presentation\Http\Controllers\Controller;
+use Presentation\Http\Requests\ProfileRequest;
 
 
 class AuthController extends Controller
 {
 
-    protected $authService;
+    protected IAuthService $authService;
 
-    public function __construct(AuthService $authService)
+    public function __construct(IAuthService $authService)
     {
         $this->authService = $authService;
     }

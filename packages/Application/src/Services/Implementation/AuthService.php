@@ -1,17 +1,18 @@
 <?php
 
-namespace Application\Services;
+namespace Application\Services\Implementation;
 
+use Application\Services\Interface\IAuthService;
 use Domain\Models\User;
-use Infrastructure\Repositories\UserRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+use Infrastructure\Repositories\UserRepository;
 
-class AuthService
+class AuthService implements IAuthService
 {
 
-    protected $userRepo;
+    protected UserRepository $userRepo;
 
     public function __construct(UserRepository $userRepo)
     {
@@ -53,7 +54,7 @@ class AuthService
     }
 
 
-    public function register(array $values)
+    public function register(array $values): void
     {
 
         $user = User::create([

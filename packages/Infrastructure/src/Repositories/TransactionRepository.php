@@ -4,11 +4,12 @@ namespace Infrastructure\Repositories;
 
 use Domain\Models\Transaction;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class TransactionRepository
 {
 
-    public function getUserTransactions(int $userId)
+    public function getUserTransactions(int $userId): Collection
     {
         return Transaction::whereHas('bankAccount', function ($query) use ($userId) {
             $query->where('user_id', $userId);
@@ -29,13 +30,12 @@ class TransactionRepository
         if (!empty($filters['client'])) {
             $query->whereHas('bankAccount.user', function ($q) use ($filters) {
                 $q->where('name', 'like', "%{$filters['client']}%")
-                  ->orWhere('surname', 'like', "%{$filters['client']}%");
+                    ->orWhere('surname', 'like', "%{$filters['client']}%");
             });
         }
 
         if (!empty($filters['account_number'])) {
-            $query->whereHas('bankAccount', fn($q) =>
-                $q->where('account_number', 'like', "%{$filters['account_number']}%"));
+            $query->whereHas('bankAccount', fn($q) => $q->where('account_number', 'like', "%{$filters['account_number']}%"));
         }
 
         if (!empty($filters['status'])) {

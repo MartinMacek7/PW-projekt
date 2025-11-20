@@ -1,20 +1,22 @@
 <?php
 
-namespace Application\Services;
+namespace Application\Services\Implementation;
 
+use Application\Services\Interface\ITransactionService;
 use Domain\Enums\TransactionStatus;
 use Domain\Enums\TransactionType;
 use Domain\Models\Transaction;
-use Infrastructure\Repositories\TransactionRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use Infrastructure\Repositories\TransactionRepository;
 
-class TransactionService
+class TransactionService implements ITransactionService
 {
     public function __construct(private TransactionRepository $transactionRepo)
     {
     }
 
-    public function getUserTransactions(int $userId)
+    public function getUserTransactions(int $userId): Collection
     {
         return $this->transactionRepo->getUserTransactions($userId);
     }

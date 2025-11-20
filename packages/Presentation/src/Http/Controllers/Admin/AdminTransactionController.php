@@ -2,14 +2,14 @@
 
 namespace Presentation\Http\Controllers\Admin;
 
-use Domain\Models\Transaction;
+use Application\Services\Interface\ITransactionService;
 use Domain\Enums\TransactionStatus;
-use Application\Services\TransactionService;
+use Domain\Models\Transaction;
 use Illuminate\Http\Request;
 
 class AdminTransactionController extends AdminController
 {
-    public function __construct(private TransactionService $transactionService)
+    public function __construct(private ITransactionService $transactionService)
     {
         parent::__construct();
     }

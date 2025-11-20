@@ -1,23 +1,27 @@
 <?php
 
-namespace Application\Services;
+namespace Application\Services\Implementation;
 
+use Application\Services\Interface\IBankAccountService;
+use Domain\Enums\AccountType;
 use Domain\Models\BankAccount;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Infrastructure\Repositories\BankAccountRepository;
 
-class BankAccountService
+class BankAccountService implements IBankAccountService
 {
 
     public function __construct(private BankAccountRepository $bankAccountRepo) {}
 
 
-    public function filterAccounts(array $filters)
+    public function filterAccounts(array $filters): LengthAwarePaginator
     {
         return $this->bankAccountRepo->filter($filters);
     }
 
 
-    public function getTransactions(BankAccount $bankAccount)
+    public function getTransactions(BankAccount $bankAccount): Collection
     {
         return $this->bankAccountRepo->getTransactions($bankAccount);
     }
@@ -31,7 +35,7 @@ class BankAccountService
 
         $bankAccount = $this->bankAccountRepo->create($data);
 
-        if ($data['account_type'] == \Domain\Enums\AccountType::CHECKING->value) {
+        if ($data['account_type'] == AccountType::CHECKING->value) {
             $this->createCardForAccount($bankAccount);
         }
 

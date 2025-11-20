@@ -1,13 +1,14 @@
 <?php
 
-namespace Application\Services;
+namespace Application\Services\Implementation;
 
+use Application\Services\Interface\ICardService;
 use Domain\Models\Card;
-use Infrastructure\Repositories\CardRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Infrastructure\Repositories\CardRepository;
 
-class CardService
+class CardService implements ICardService
 {
     public function __construct(private CardRepository $cardRepo)
     {}

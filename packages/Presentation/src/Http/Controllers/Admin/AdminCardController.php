@@ -2,13 +2,13 @@
 
 namespace Presentation\Http\Controllers\Admin;
 
+use Application\Services\Interface\ICardService;
 use Domain\Models\Card;
-use Application\Services\CardService;
 use Illuminate\Http\Request;
 
 class AdminCardController extends AdminController
 {
-    public function __construct(private CardService $cardService)
+    public function __construct(private ICardService $cardService)
     {}
 
     public function index(Request $request)

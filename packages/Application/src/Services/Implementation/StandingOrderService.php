@@ -1,17 +1,19 @@
 <?php
 
-namespace Application\Services;
+namespace Application\Services\Implementation;
 
+use Application\Services\Interface\IStandingOrderService;
 use Domain\Models\StandingOrder;
-use Infrastructure\Repositories\StandingOrderRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
+use Infrastructure\Repositories\StandingOrderRepository;
 
-class StandingOrderService
+class StandingOrderService implements IStandingOrderService
 {
     public function __construct(private StandingOrderRepository $standingOrderRepository) {}
 
 
-    public function getUserStandingOrders(int $userId)
+    public function getUserStandingOrders(int $userId): Collection|array
     {
         return $this->standingOrderRepository->getAllForUser($userId);
     }

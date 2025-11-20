@@ -2,18 +2,17 @@
 
 namespace Presentation\Http\Controllers\Client;
 
-use Application\Services\CardService;
+use Application\Services\Interface\ICardService;
 use Domain\Models\Card;
-use Domain\Models\User;
-use Presentation\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Presentation\Http\Controllers\Controller;
 
 class CardController extends Controller
 {
 
 
-    public function __construct(private CardService $cardService)
+    public function __construct(private ICardService $cardService)
     {
         parent::__construct();
     }

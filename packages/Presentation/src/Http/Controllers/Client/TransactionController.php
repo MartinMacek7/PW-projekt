@@ -2,14 +2,14 @@
 
 namespace Presentation\Http\Controllers\Client;
 
-use Application\Services\TransactionService;
+use Application\Services\Interface\ITransactionService;
+use Illuminate\Support\Facades\Auth;
 use Presentation\Http\Controllers\Controller;
 use Presentation\Http\Requests\TransactionRequest;
-use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    public function __construct(private TransactionService $transactionService)
+    public function __construct(private ITransactionService $transactionService)
     {
         parent::__construct();
     }

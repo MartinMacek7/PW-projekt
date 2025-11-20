@@ -2,14 +2,14 @@
 
 namespace Presentation\Http\Controllers\Admin;
 
-use Application\Services\UserService;
+use Application\Services\Interface\IUserService;
 use Domain\Models\User;
 use Illuminate\Http\Request;
 
 class AdminUserController extends AdminController
 {
 
-    public function __construct(private UserService $userService)
+    public function __construct(private IUserService $userService)
     {
         parent::__construct();
     }

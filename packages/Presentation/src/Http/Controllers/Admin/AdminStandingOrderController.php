@@ -2,14 +2,14 @@
 
 namespace Presentation\Http\Controllers\Admin;
 
+use Application\Services\Interface\IStandingOrderService;
 use Domain\Models\StandingOrder;
-use Application\Services\StandingOrderService;
 use Illuminate\Http\Request;
 
 class AdminStandingOrderController extends AdminController
 {
 
-    public function __construct(private StandingOrderService $standingOrderService) {
+    public function __construct(private IStandingOrderService $standingOrderService) {
         parent::__construct();
     }
 

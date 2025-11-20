@@ -1,17 +1,18 @@
 <?php
 
-namespace Application\Services;
+namespace Application\Services\Implementation;
 
+use Application\Services\Interface\IUserService;
 use Domain\Enums\UserRole;
 use Domain\Models\User;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 use Infrastructure\Repositories\UserRepository;
 use Presentation\Http\Requests\AdminClientRequest;
 use Presentation\Http\Requests\ProfileRequest;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-class UserService
+class UserService implements IUserService
 {
 
     public function __construct(private UserRepository $userRepository)

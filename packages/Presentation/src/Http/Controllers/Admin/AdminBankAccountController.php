@@ -2,18 +2,18 @@
 
 namespace Presentation\Http\Controllers\Admin;
 
+use Application\Services\Interface\IBankAccountService;
+use Domain\Enums\AccountType;
+use Domain\Enums\Currency;
 use Domain\Models\BankAccount;
 use Domain\Models\User;
-use Domain\Enums\Currency;
-use Domain\Enums\AccountType;
-use Presentation\Http\Requests\AdminBankAccountRequest;
-use Application\Services\BankAccountService;
 use Illuminate\Http\Request;
+use Presentation\Http\Requests\AdminBankAccountRequest;
 
 class AdminBankAccountController extends AdminController
 {
 
-    public function __construct(private BankAccountService $bankAccountService) {
+    public function __construct(private IBankAccountService $bankAccountService) {
         parent::__construct();
     }
 

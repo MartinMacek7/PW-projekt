@@ -2,16 +2,16 @@
 
 namespace Presentation\Http\Controllers\Client;
 
+use Application\Services\Interface\ILoanService;
 use Domain\Models\Loan;
-use Application\Services\LoanService;
+use Illuminate\Support\Facades\Auth;
 use Presentation\Http\Controllers\Controller;
 use Presentation\Http\Requests\LoanRequest;
-use Illuminate\Support\Facades\Auth;
 
 class LoanController extends Controller
 {
 
-    public function __construct(private LoanService $loanService)
+    public function __construct(private ILoanService $loanService)
     {
         parent::__construct();
     }
