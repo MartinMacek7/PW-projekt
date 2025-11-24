@@ -46,6 +46,9 @@ Route::get('/accounts/{account}', [BankAccountController::class, 'show'])
     ->middleware('account.owner')
     ->name('accounts.show');
 
+Route::get('/accounts/{account}/pdf', [BankAccountController::class, 'exportPdf'])
+    ->name('accounts.pdf');
+
 
 Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
 Route::get('/transactions/create', [TransactionController::class, 'showCreateForm'])->name('transactions.create');

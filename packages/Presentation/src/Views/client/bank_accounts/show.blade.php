@@ -52,7 +52,8 @@
                     <p class="card-text mb-3"><strong>Zůstatek:</strong> <span class="balance">{{ $account->getFormattedBalance() }}</span></p>
 
                     <a href="{{ route('accounts') }}" class="btn btn-secondary px-4 me-2">Zpět na účty</a>
-                    <a href="{{ route('transactions.create', ['bank_account_id' => $account->id]) }}" class="btn btn-primary px-4">Nová transakce</a>
+                    <a href="{{ route('transactions.create', ['bank_account_id' => $account->id]) }}" class="btn btn-primary px-4 me-2">Nová transakce</a>
+                    <a href="{{ route('accounts.pdf', $account->id) }}" class="btn btn-success">Stáhnout výpis</a>
                 </div>
             </div>
         </div>

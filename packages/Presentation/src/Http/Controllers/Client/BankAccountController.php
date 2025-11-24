@@ -2,16 +2,18 @@
 
 namespace Presentation\Http\Controllers\Client;
 
+use Application\Services\Interface\IBankAccountService;
 use Domain\Models\BankAccount;
 use Presentation\Http\Controllers\Controller;
 use Domain\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+
 class BankAccountController extends Controller
 {
 
 
-    public function __construct()
+    public function __construct(private IBankAccountService $bankAccountService)
     {
         parent::__construct();
     }
@@ -32,6 +34,12 @@ class BankAccountController extends Controller
     public function show(BankAccount $account)
     {
         return view('presentation::client.bank_accounts.show', compact('account'));
+    }
+
+
+    public function exportPdf(BankAccount $account)
+    {
+        return $this->bankAccountService->generatePdf($account);
     }
 
 

@@ -3,10 +3,12 @@
 namespace Application\Services\Implementation;
 
 use Application\Services\Interface\IBankAccountService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Domain\Enums\AccountType;
 use Domain\Models\BankAccount;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Response;
 use Infrastructure\Repositories\BankAccountRepository;
 
 class BankAccountService implements IBankAccountService
@@ -85,5 +87,18 @@ class BankAccountService implements IBankAccountService
 
         return $number;
     }
+
+
+    public function generatePdf(BankAccount $account): Response
+    {
+
+        $pdf = Pdf::loadView('presentation::client.bank_accounts.pdf', [
+            'account' => $account,
+            'transactions' => $account->transactions()->orderBy('created_at', 'desc')->get()
+        ]);
+
+        return $pdf->download('vypis-uctu-' . $account->account_number . '.pdf');
+    }
+
 
 }
