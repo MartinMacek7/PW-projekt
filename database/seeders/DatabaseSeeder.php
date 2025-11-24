@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
             'address_number' => '192',
             'address_city' => 'Vacenovice',
             'address_zip_code' => '69603',
+            'permission_level' => 100
         ]);
 
         $account1 = BankAccount::create([
