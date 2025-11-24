@@ -13,7 +13,9 @@ class TransactionRepository
     {
         return Transaction::whereHas('bankAccount', function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        })->get();
+        })
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
 
